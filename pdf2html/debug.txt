@@ -1,0 +1,43 @@
+Valgrind :
+
+1) On compile avec l'option -g avant le -Wall
+
+2) L'option Valgrind nous indique que nous n'avons alloué aucune memoire
+
+3) 
+==5890== HEAP SUMMARY:
+==5890==     in use at exit: 0 bytes in 0 blocks
+==5890==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==5890== 
+==5890== All heap blocks were freed -- no leaks are possible
+==5890== 
+==5890== For counts of detected and suppressed errors, rerun with: -v
+==5890== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+Il nous explique qu'il n'y a pas de memoire alloué à la fin du code
+On a alloué aucune memoire pendant le code
+Donc tous les heap étaient alloués ==> pas d'erreurs
+
+4)
+5)
+On ecrit un int dans p alors qu'il attends une adresse
+Il nous dit que à la fin du code on a bien tout free (en loccurence rien a free car rien alloué)
+
+6)
+il faut allouer la memoire de p en ajoutant :
+p=calloc(size, sizeof(int));
+
+7)
+On initialise pas sum à 0,
+de plus on free(p) avant la fin, il faut le deplacer à la fin
+
+8)
+sur le fichier mem3.c, valgrind nous indique que l'on a pas libéré 40 bytes de memoire avant la fin du code/
+
+9)
+valgrind n'indique pas de ligne fautive (fuite de memoire)
+
+10)
+On a oublié de supprimer le tableau de pointeur p
+on ajoute free(p) a la fin et valgrind ne retourne plus d'erreurs
+

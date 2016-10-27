@@ -14,5 +14,6 @@ int main(void)
 
   for( i = 0 ; i < size ; i++)
     free(p[i]);
+free(p);
   return EXIT_SUCCESS;     
 }
